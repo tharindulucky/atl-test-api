@@ -4,6 +4,8 @@
 
 Please clone the project and switch to ```main``` branch
 
+Run composer install
+
 Run the migrations and seeders.
 
 Sample Events and Stall have been added as Seeders. Use them or import the DB Dump provided.
