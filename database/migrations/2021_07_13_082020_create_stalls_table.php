@@ -17,6 +17,7 @@ class CreateStallsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('description')->nullable();
+            $table->string('image')->nullable();
             $table->string('price')->nullable();
             $table->integer('event_id');
             $table->timestamps();

@@ -22,7 +22,7 @@ class EventController extends Controller
 
     public function show($id){
         try{
-            $event = Event::find($id);
+            $event = Event::where('id', $id)->with('getStallsRel.getBookingRel')->first();
             return APIHelper::createSuccessAPIResponse($event, 200, 'success' ,null);
         }catch (\Exception $e){
             report($e);
