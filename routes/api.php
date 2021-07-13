@@ -14,9 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/register', [\App\Http\Controllers\API\AuthController::class,'register']);
-Route::post('/login', [\App\Http\Controllers\API\AuthController::class,'login']);
+Route::post('/register', [\App\Http\Controllers\API\AuthController::class,'register'])->name('register');
+Route::post('/login', [\App\Http\Controllers\API\AuthController::class,'login'])->name('login');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/events', [\App\Http\Controllers\API\EventController::class,'index'])->name('events.index');
+Route::get('/events/{id}', [\App\Http\Controllers\API\EventController::class,'show'])->name('events.shoow');
+Route::get('/events/{id}/stalls', [\App\Http\Controllers\API\EventController::class,'getEventStalls'])->name('events.getEventStalls');
+
+Route::get('/stalls/{id}', [\App\Http\Controllers\API\EventController::class,'getStall'])->name('events.getStall');
+
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::post('events/{event_id}/stalls/{stall_id}/book', [\App\Http\Controllers\API\BookingController::class,'bookStall'])->name('bookings.bookStall');
 });
+
+
