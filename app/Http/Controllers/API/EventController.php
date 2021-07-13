@@ -42,7 +42,7 @@ class EventController extends Controller
 
     public function getStall($stall_id){
         try{
-            $stalls = Stall::where('id', $stall_id)->with('getEventRel')->first();
+            $stalls = Stall::where('id', $stall_id)->with(['getEventRel', 'getBookingRel'])->first();
             return APIHelper::createSuccessAPIResponse($stalls, 200, 'success' ,null);
         }catch (\Exception $e){
             report($e);
